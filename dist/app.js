@@ -22,6 +22,10 @@ app.use(express_1.default.json());
 app.post('/api/submit', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const receivedUserName = req.body.data;
     console.log('Received data:', receivedUserName);
+    if (receivedUserName === "DmitriyH") {
+        res.status(201).json({ "message": "DmitriyH, the expert who's been stuck in neutral for so long, he's starting to think 'candidate master' is just a myth perpetuated by people who actually try. With a rating that's been plateauing for years, it's a wonder you haven't gotten bored enough to contribute something, anything, to the community. Your 95 friends must be thrilled to be associated with someone whose peak is being an also-ran. Here's to another decade of going through the motions, Dmitriy" });
+        return;
+    }
     const data = yield fetch(`https://codeforces.com/api/user.info?handles=${receivedUserName}&checkHistoricHandles=false`);
     if (!data.ok) {
         console.log(`HTTP error! Status: ${data.status}`);

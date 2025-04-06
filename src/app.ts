@@ -2,8 +2,13 @@ import express, { Request, Response } from 'express';
 import {getGroqChatCompletion} from './components/groq_Components';
 import cors from 'cors';
 const app = express();
-const port = 5000;
-app.use(cors()); 
+app.use(
+  cors({
+    origin: "exquisite-stroopwafel-30fed5.netlify.app", // frontend URL (like Vite)
+    methods: ['GET', 'POST'],
+    credentials: true, // if you're using cookies or sessions
+  })
+);
 app.use(express.json());
 
 app.post('/api/submit', async (req: Request, res: Response) => {
@@ -22,10 +27,10 @@ app.post('/api/submit', async (req: Request, res: Response) => {
 });
 
 
-app.get('/api/demo', async (req: Request, res: Response) => {
+app.get('/', async (req: Request, res: Response) => {
   res.status(200).json({"message": "hi"});
 });
 
-app.listen(port, () => {
-  console.log(`Express server running on port ${port}`);
+app.listen(process.env.Port, () => {
+  console.log(`Express server running`);
 });

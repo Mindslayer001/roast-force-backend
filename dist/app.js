@@ -16,16 +16,15 @@ const express_1 = __importDefault(require("express"));
 const groq_Components_1 = require("./components/groq_Components");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const port = 5000;
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: "exquisite-stroopwafel-30fed5.netlify.app", // frontend URL (like Vite)
+    methods: ['GET', 'POST'],
+    credentials: true, // if you're using cookies or sessions
+}));
 app.use(express_1.default.json());
 app.post('/api/submit', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const receivedUserName = req.body.data;
     console.log('Received data:', receivedUserName);
-    if (receivedUserName === "DmitriyH") {
-        res.status(201).json({ "username": "DmitriyH", "postText": "DmitriyH, the expert who's been stuck in neutral for so long, he's starting to think 'candidate master'", "avatarUrl": "https://userpic.codeforces.org/1592/avatar/7cef566902732053.jpg" });
-        return;
-    }
     const data = yield fetch(`https://codeforces.com/api/user.info?handles=${receivedUserName}&checkHistoricHandles=false`);
     if (!data.ok) {
         console.log(`HTTP error! Status: ${data.status}`);
@@ -37,9 +36,9 @@ app.post('/api/submit', (req, res) => __awaiter(void 0, void 0, void 0, function
     const result = yield (0, groq_Components_1.getGroqChatCompletion)(user);
     res.status(201).json({ "username": receivedUserName, "postText": result, "avatarUrl": user.titlePhoto });
 }));
-app.get('/api/demo', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({ "message": "hi" });
 }));
-app.listen(port, () => {
-    console.log(`Express server running on port ${port}`);
+app.listen(process.env.Port, () => {
+    console.log(`Express server running`);
 });

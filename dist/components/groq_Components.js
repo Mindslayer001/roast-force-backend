@@ -16,7 +16,6 @@ exports.getGroqChatCompletion = getGroqChatCompletion;
 const groq_sdk_1 = __importDefault(require("groq-sdk"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-console.log(process.env.GROQ_API_KEY);
 function getGroqChatCompletion(user) {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b, _c, _d;

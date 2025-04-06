@@ -23,7 +23,7 @@ app.post('/api/submit', (req, res) => __awaiter(void 0, void 0, void 0, function
     const receivedUserName = req.body.data;
     console.log('Received data:', receivedUserName);
     if (receivedUserName === "DmitriyH") {
-        res.status(201).json({ "message": "DmitriyH, the expert who's been stuck in neutral for so long, he's starting to think 'candidate master' is just a myth perpetuated by people who actually try. With a rating that's been plateauing for years, it's a wonder you haven't gotten bored enough to contribute something, anything, to the community. Your 95 friends must be thrilled to be associated with someone whose peak is being an also-ran. Here's to another decade of going through the motions, Dmitriy" });
+        res.status(201).json({ "username": "DmitriyH", "postText": "DmitriyH, the expert who's been stuck in neutral for so long, he's starting to think 'candidate master'", "avatarUrl": "https://userpic.codeforces.org/1592/avatar/7cef566902732053.jpg" });
         return;
     }
     const data = yield fetch(`https://codeforces.com/api/user.info?handles=${receivedUserName}&checkHistoricHandles=false`);
@@ -35,7 +35,7 @@ app.post('/api/submit', (req, res) => __awaiter(void 0, void 0, void 0, function
     const jsonData = yield data.json();
     const user = jsonData.result[0];
     const result = yield (0, groq_Components_1.getGroqChatCompletion)(user);
-    res.status(201).json({ "message": result });
+    res.status(201).json({ "username": receivedUserName, "postText": result, "avatarUrl": user.titlePhoto });
 }));
 app.get('/api/demo', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({ "message": "hi" });

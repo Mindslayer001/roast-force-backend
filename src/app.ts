@@ -9,10 +9,6 @@ app.use(express.json());
 app.post('/api/submit', async (req: Request, res: Response) => {
   const receivedUserName: string = req.body.data;
   console.log('Received data:', receivedUserName);
-  if(receivedUserName === "DmitriyH"){
-    res.status(201).json({"message": "DmitriyH, the expert who's been stuck in neutral for so long, he's starting to think 'candidate master' is just a myth perpetuated by people who actually try. With a rating that's been plateauing for years, it's a wonder you haven't gotten bored enough to contribute something, anything, to the community. Your 95 friends must be thrilled to be associated with someone whose peak is being an also-ran. Here's to another decade of going through the motions, Dmitriy"});
-    return;
-  }
   const data = await fetch(`https://codeforces.com/api/user.info?handles=${receivedUserName}&checkHistoricHandles=false`)
   if(!data.ok){
     console.log(`HTTP error! Status: ${data.status}`)
@@ -22,7 +18,7 @@ app.post('/api/submit', async (req: Request, res: Response) => {
   const jsonData = await data.json()
   const user : CodeForce_Interface = jsonData.result[0]
   const result = await getGroqChatCompletion(user);
-  res.status(201).json({"message": result});
+  res.status(201).json({"username":receivedUserName,"postText": result, "avatarUrl":user.titlePhoto});
 });
 
 

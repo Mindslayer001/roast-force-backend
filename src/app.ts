@@ -3,8 +3,17 @@ import {getGroqChatCompletion} from './components/groq_Components';
 import cors from 'cors';
 import {supabase} from './components/Supabase_components';
 const app = express();
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://roast-force-frontend.vercel.app/',
+  ],
+  methods: ['GET', 'POST'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 app.use(
-  cors()
+  cors(corsOptions)
 );
 app.use(express.json());
 

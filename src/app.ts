@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import {getGroqChatCompletion} from './components/groq_Components';
+import { getOpenRouterChat } from './components/openRouter';
 import cors from 'cors';
 import {supabase} from './components/Supabase_components';
 const app = express();
@@ -17,6 +18,7 @@ app.use(
   cors(corsOptions)
 );
 app.use(express.json());
+
 
 app.post('/api/submit', async (req: Request, res: Response) => {
   const receivedUserName: string = req.body.data;
@@ -40,7 +42,8 @@ app.post('/api/submit', async (req: Request, res: Response) => {
   let result;
   const userid:number = userDetailsFromDB?userDetailsFromDB.user_id : 0;
   if(userDetailsFromDB?.roast === "ok"){ 
-    result = await getGroqChatCompletion(user);
+    result = await getOpenRouterChat(user);
+
     const {data,error} = await supabase.rpc('set_recent_roast', {roast: result, user_id: userid }) as { data: setRecentRoast | null, error: any };;
   }
   else{
@@ -58,4 +61,5 @@ app.get('/history', async (req: Request, res: Response) => {
 
 app.listen(process.env.Port, () => {
   console.log(`Express server running on port ${process.env.Port}`);
+
 });

@@ -52,7 +52,7 @@ Here's the real contestant's data: Name: ${user.firstName || ""} ${user.lastName
   - Organization: ${user.organization || "N/A"}
   - Last Online: ${new Date(user.lastOnlineTimeSeconds * 1000).toLocaleString()}
   - Registered: ${new Date(user.registrationTimeSeconds * 1000).toLocaleString()} 
-  Please Provide the roast in the same format as the example response and Make the response is in between 200 and 250 letters.`
+  Please Provide the roast in the same format as the example response and Make the response is in between 300 and 350 letters.`
 
 
   console.log('System Prompt:', systemPrompt);

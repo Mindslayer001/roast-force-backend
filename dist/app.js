@@ -53,7 +53,7 @@ app.post('/api/submit', (req, res) => __awaiter(void 0, void 0, void 0, function
     console.log("Timer", timer);
     res.status(201).json({ "username": receivedUserName, "postText": result, "avatarUrl": user.titlePhoto, "timer": timer, "new_user": userDetailsFromDB === null || userDetailsFromDB === void 0 ? void 0 : userDetailsFromDB.new_user });
 }));
-app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/history', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({ "message": "hi" });
 }));
 app.listen(process.env.Port, () => {

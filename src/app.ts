@@ -6,7 +6,7 @@ const app = express();
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://roast-force-frontend.vercel.app/',
+    'https://roast-force-frontend.vercel.app',
   ],
   methods: ['GET', 'POST'],
   credentials: true,

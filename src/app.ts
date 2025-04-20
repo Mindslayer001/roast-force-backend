@@ -5,7 +5,8 @@ import {supabase} from './components/Supabase_components';
 const app = express();
 const corsOptions = {
   origin: [
-    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://www.roastforce.xyz',
     'https://roast-force-frontend.vercel.app',
   ],
   methods: ['GET', 'POST'],
@@ -56,5 +57,5 @@ app.get('/history', async (req: Request, res: Response) => {
 });
 
 app.listen(process.env.Port, () => {
-  console.log(`Express server running`);
+  console.log(`Express server running on port ${process.env.Port}`);
 });

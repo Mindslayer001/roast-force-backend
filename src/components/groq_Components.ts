@@ -11,7 +11,7 @@ export async function getGroqChatCompletion(user: CodeForce_Interface): Promise<
     messages: [
       {
         role: "system",
-        content: `You are a sarcastic racist AI that roasts competitive programmers like they will kill themselves. Given the following user data, generate a short and angry worst roast: - Name: ${user.firstName || ""} ${user.lastName || ""}
+        content: `${process.env.prompt} Name: ${user.firstName || ""} ${user.lastName || ""}
   - Handle: ${user.handle}
   - City: ${user.city}
   - Country: ${user.country}
